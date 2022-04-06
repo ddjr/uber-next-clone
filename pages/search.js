@@ -1,10 +1,11 @@
-import React from "react";
+import React, { useState } from "react";
 import tw from "tailwind-styled-components";
 import Link from "next/link";
 import ArrowBackIcon from "@mui/icons-material/ArrowBack";
-import HomeOutlinedIcon from "@mui/icons-material/HomeOutlined";
 import FavoriteLocation from "./components/FavoriteLocation";
-const Search = () => {
+function Search() {
+  const [pickup, setPickup] = useState("");
+  const [dropoff, setDropoff] = useState("");
   return (
     <Wrapper>
       <Link href="/">
@@ -31,19 +32,35 @@ const Search = () => {
           />
         </FromToIcons>
         <InputBoxes>
-          <Input placeholder="Enter pickup Location" />
-          <Input placeholder="Where to?" />
+          <Input
+            placeholder="Enter pickup Location"
+            value={pickup}
+            onChange={(e) => setPickup(e.target.value)}
+          />
+          <Input
+            placeholder="Where to?"
+            value={dropoff}
+            onChange={(e) => setDropoff(e.target.value)}
+          />
         </InputBoxes>
       </InputContainer>
       <SavedPlaces>
         <FavoriteLocation />
-        <Link href="/confirm">
+        <Link
+          href={{
+            pathname: "/confirm",
+            query: {
+              pickup: pickup,
+              dropoff: dropoff,
+            },
+          }}
+        >
           <ConfirmLocations>Confirm Locations</ConfirmLocations>
         </Link>
       </SavedPlaces>
     </Wrapper>
   );
-};
+}
 
 export default Search;
 
