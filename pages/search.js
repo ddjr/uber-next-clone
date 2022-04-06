@@ -1,8 +1,10 @@
 import React, { useState } from "react";
+import { useRouter } from "next/router";
 import tw from "tailwind-styled-components";
 import Link from "next/link";
 import ArrowBackIcon from "@mui/icons-material/ArrowBack";
 import FavoriteLocation from "./components/FavoriteLocation";
+
 function Search() {
   const [pickup, setPickup] = useState("");
   const [dropoff, setDropoff] = useState("");
@@ -45,7 +47,11 @@ function Search() {
         </InputBoxes>
       </InputContainer>
       <SavedPlaces>
-        <FavoriteLocation />
+        <ContainerFavoriteLocation
+          onClick={() => setDropoff("450 W Melrose Street Chicacgo, IL")}
+        >
+          <FavoriteLocation />
+        </ContainerFavoriteLocation>
         <Link
           href={{
             pathname: "/confirm",
@@ -64,7 +70,7 @@ function Search() {
 
 export default Search;
 
-const Wrapper = tw.div` h-screen bg-black flex flex-col`;
+const Wrapper = tw.div` h-screen w-full bg-black flex flex-col`;
 const BackButtonContainer = tw.div`flex justify-center cursor-pointer`;
 const Trip = tw.div`text-white pt-2`;
 
@@ -77,4 +83,18 @@ const InputBoxes = tw.div`flex flex-col flex-1`;
 const Input = tw.input`bg-gray-200 h-10 p-2 my-2 rounded-sm outline-none border-none mr-3`;
 
 const SavedPlaces = tw.div`flex flex-col items-center bg-white p-4 rounded-t-lg flex-1 h-fit justify-between`;
+const ContainerFavoriteLocation = tw.div`w-full`;
 const ConfirmLocations = tw.div`flex bg-black text-white p-2 justify-center m-2 cursor-pointer w-full rounded-md`;
+
+const SuggestionWrapper = tw.div`
+  background: white;
+  position: absolute;
+  width: 400px;
+  padding: 10px 20px;
+  border-radius: 0px 0px 10px 10px;
+`;
+
+const Suggestion = tw.p`
+  cursor: pointer;
+  max-width: 400px;
+`;

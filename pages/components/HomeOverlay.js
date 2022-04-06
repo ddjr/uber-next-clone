@@ -4,30 +4,33 @@ import MenuIcon from "@mui/icons-material/Menu";
 import SearchOutlinedIcon from "@mui/icons-material/SearchOutlined";
 import Link from "next/link";
 import FavoriteLocation from "./FavoriteLocation";
-const HomeOverlay = () => {
+import { signOut } from "firebase/auth";
+import { auth } from "../../firebase";
+
+const HomeOverlay = ({ photoUrl, name }) => {
   return (
     <Wrapper>
       <WrapperTop>
         <MenuIcon />
         <UberLogo src="https://i.ibb.co/n6LWQM4/Post.png" alt="logo" />
-        <UserImg src="https://us.123rf.com/450wm/fizkes/fizkes2010/fizkes201001384/157765614-profile-picture-of-smiling-indian-female-isolated-on-grey-studio-background-show-optimism-and-positi.jpg?ver=6" />
+        <UserImg src={photoUrl} onClick={() => signOut(auth)} />
       </WrapperTop>
-      <WrapperBottom>
-        <Greeting>Howdy David!</Greeting>
-        <Link href="/search">
+      <Link href="/search">
+        <WrapperBottom>
+          <Greeting>Howdy {name}!</Greeting>
+
           <SearchWrapper>
             <SearchIcon>
               <SearchOutlinedIcon style={{ fill: "#fff" }} />
             </SearchIcon>
             <Input placeholder="Where to?" />
           </SearchWrapper>
-        </Link>
-        <Link href="/search">
+
           <FavoriteLocationWrapper>
             <FavoriteLocation />
           </FavoriteLocationWrapper>
-        </Link>
-      </WrapperBottom>
+        </WrapperBottom>
+      </Link>
     </Wrapper>
   );
 };
@@ -36,7 +39,7 @@ export default HomeOverlay;
 const Wrapper = tw.div``;
 
 // TOP
-const WrapperTop = tw.div`fixed top-0 left-0 right-0 flex justify-between items-center z-10 mx-5 my-3 md:max-w-[768px] md:p-3 md:mx-auto`;
+const WrapperTop = tw.div`fixed top-0 left-10 right-10 flex justify-between items-center z-10 mx-5 my-3 md:max-w-[650px] md:mx-auto`;
 const UberLogo = tw.img`h-7 mt-1`;
 const Profile = tw.div``;
 const UserImg = tw.img`h-12 w-12 rounded-full object-cover border border-gray-200 p-px`;

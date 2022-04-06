@@ -1,5 +1,5 @@
 import tw from "tailwind-styled-components";
-const Ride = ({ id, imgUrl, service, multiplier }) => {
+const Ride = ({ id, imgUrl, service, multiplier, duration }) => {
   return (
     <Wrapper key={id}>
       <RideImg src={imgUrl} alt="uberX" />
@@ -7,7 +7,7 @@ const Ride = ({ id, imgUrl, service, multiplier }) => {
         <RideType>{service}</RideType>
         <RideDistance>5 min away</RideDistance>
       </RideInfo>
-      <RidePrice>${Math.floor(multiplier * 7.44 * 100) / 100}</RidePrice>
+      <RidePrice>${(multiplier * duration).toFixed(2)}</RidePrice>
     </Wrapper>
   );
 };
