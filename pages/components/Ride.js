@@ -1,7 +1,7 @@
 import tw from "tailwind-styled-components";
-const Ride = ({ id, imgUrl, service, multiplier, duration }) => {
+const Ride = ({ key, imgUrl, service, multiplier, duration }) => {
   return (
-    <Wrapper key={id}>
+    <Wrapper key={key}>
       <RideImg src={imgUrl} alt="uberX" />
       <RideInfo>
         <RideType>{service}</RideType>

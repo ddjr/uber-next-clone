@@ -1,3 +1,4 @@
+/* eslint-disable no-console, no-control-regex*/
 import { useEffect, useState } from "react";
 import tw from "tailwind-styled-components";
 import Map from "./components/Map";
@@ -7,13 +8,12 @@ import ArrowBackIcon from "@mui/icons-material/ArrowBack";
 import Link from "next/link";
 
 export default function Confirm() {
+  const [pickupCoordinates, setPickupCoordinates] = useState([0, 0]);
+  const [dropoffCoordinates, setDropoffCoordinates] = useState([0, 0]);
   const router = useRouter();
   const { pickup, dropoff } = router.query;
 
-  const [pickupCoordinates, setPickupCoordinates] = useState([0, 0]);
-  const [dropoffCoordinates, setDropoffCoordinates] = useState([0, 0]);
-
-  const getPickupCoordinates = (pickup) => {
+  function getPickupCoordinates(pickup) {
     fetch(
       `https://api.mapbox.com/geocoding/v5/mapbox.places/${pickup}.json?` +
         new URLSearchParams({
@@ -26,7 +26,7 @@ export default function Confirm() {
       .then((data) => {
         setPickupCoordinates(data.features[0].center);
       });
-  };
+  }
 
   const getDropoffCorrdinates = (dropoff) => {
     fetch(
@@ -50,7 +50,7 @@ export default function Confirm() {
 
   return (
     <Wrapper>
-      <Link href="/search">
+      <Link href="/search" passHref>
         <ArrowIcon>
           <ArrowBackIcon style={{ fontSize: "40px" }} />
         </ArrowIcon>

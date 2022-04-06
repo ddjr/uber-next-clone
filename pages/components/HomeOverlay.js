@@ -15,7 +15,7 @@ const HomeOverlay = ({ photoUrl, name }) => {
         <UberLogo src="https://i.ibb.co/n6LWQM4/Post.png" alt="logo" />
         <UserImg src={photoUrl} onClick={() => signOut(auth)} />
       </WrapperTop>
-      <Link href="/search">
+      <Link href="/search" passHref>
         <WrapperBottom>
           <Greeting>Howdy {name}!</Greeting>
 

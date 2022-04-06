@@ -10,7 +10,7 @@ function Search() {
   const [dropoff, setDropoff] = useState("");
   return (
     <Wrapper>
-      <Link href="/">
+      <Link href="/" passHref>
         <BackButtonContainer>
           <ArrowBackIcon
             style={{ fill: "#FFF", position: "fixed", top: "9", left: "12" }}
@@ -60,6 +60,7 @@ function Search() {
               dropoff: dropoff,
             },
           }}
+          passHref
         >
           <ConfirmLocations>Confirm Locations</ConfirmLocations>
         </Link>
